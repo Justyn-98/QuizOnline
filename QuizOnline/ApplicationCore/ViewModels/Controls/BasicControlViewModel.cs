@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Storage.DataAccessLayer
+namespace AppCore.ViewModels.Controls
 {
-    class AppContext
+    class BasicControlViewModel
     {
     }
 }
