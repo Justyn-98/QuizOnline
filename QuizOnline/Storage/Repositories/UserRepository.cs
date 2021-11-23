@@ -30,10 +30,9 @@ namespace Storage.Repositories
 
         public async Task CreateUser(string name)
         {
-
             await _context.firebaseClient
               .Child("Users")
-              .PostAsync(new AppUser() { Id = 1, Name = name });
+              .PostAsync(new AppUser() { Id =  GetAllUsers().Result.Count + 1, Name = name });
         }
 
         public async Task<AppUser> GetPerson(int personId)
