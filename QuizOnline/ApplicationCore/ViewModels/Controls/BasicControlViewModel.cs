@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Storage.Models
+namespace AppCore.ViewModels.Controls
 {
-    public class BasicModel
+    class BasicControlViewModel
     {
-        public int Id { get; set; }
     }
 }

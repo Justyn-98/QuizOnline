@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Storage.Models
+namespace DataStorage.Models
 {
     public class BasicModel
     {

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Storage.Models
 {
-    public class BasicModel
+    public class AppUser : BasicModel
     {
-        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

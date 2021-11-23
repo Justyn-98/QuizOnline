@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Storage.Models
+namespace Storage.Interfaces
 {
-    public class BasicModel
+    public interface IUserRepository
     {
-        public int Id { get; set; }
+        public Task CreateUser(string name);
     }
 }

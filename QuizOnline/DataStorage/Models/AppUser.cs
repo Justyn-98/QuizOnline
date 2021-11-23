@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Storage.Models
+namespace DataStorage.Models
 {
-    public class BasicModel
+    public class AppUser : BasicModel
     {
-        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }
