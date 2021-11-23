@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Controls\" />
-    <Folder Include="ViewModels\Pages\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Storage\Storage.csproj" />
   </ItemGroup>
 
