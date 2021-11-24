@@ -1,5 +1,6 @@
-﻿using QuizOnlineApp.Models;
-using System;
+﻿using Firebase.Database;
+using Firebase.Database.Query;
+using QuizOnlineApp.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,53 +9,68 @@ namespace QuizOnlineApp.Services
 {
     public class MockDataStore : IDataStore<Item>
     {
-        readonly List<Item> items;
-       
-        public MockDataStore()
-        {
-            items = new List<Item>()
-            {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
-            };
-        }
+
+        FirebaseClient firebaseClient = new FirebaseClient("https://quizonline-ed972-default-rtdb.firebaseio.com/");
 
         public async Task<bool> AddItemAsync(Item item)
         {
-            items.Add(item);
+            await firebaseClient
+              .Child("Items")
+              .PostAsync(item);
 
             return await Task.FromResult(true);
         }
 
         public async Task<bool> UpdateItemAsync(Item item)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(oldItem);
-            items.Add(item);
+            var toUpdateItem = (await firebaseClient
+                .Child("Items")
+                .OnceAsync<Item>()).Where(a => a.Object.Id == item.Id).FirstOrDefault();
+
+            await firebaseClient
+              .Child("Items")
+              .Child(toUpdateItem.Key)
+              .PutAsync(item);
 
             return await Task.FromResult(true);
         }
 
         public async Task<bool> DeleteItemAsync(string id)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(oldItem);
+            var toDeletePerson = (await firebaseClient
+              .Child("Items")
+              .OnceAsync<Item>()).Where(a => a.Object.Id == id).FirstOrDefault();
+                        await firebaseClient.Child("Items").Child(toDeletePerson.Key).DeleteAsync();
 
             return await Task.FromResult(true);
         }
 
         public async Task<Item> GetItemAsync(string id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            var list = (await firebaseClient
+                 .Child("Items")
+                 .OnceAsync<Item>()).Select(item => new Item
+                 {
+                     Text = item.Object.Text,
+                     Id = item.Object.Id,
+                     Description = item.Object.Description
+                 }).ToList();
+
+            return await Task.FromResult(list.FirstOrDefault(s => s.Id == id));
         }
 
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
         {
-            return await Task.FromResult(items);
+            var list = (await firebaseClient
+            .Child("Items")
+            .OnceAsync<Item>()).Select(item => new Item
+            {
+                Text = item.Object.Text,
+                Id = item.Object.Id,
+                Description = item.Object.Description
+            }).ToList();
+
+            return await Task.FromResult(list);
         }
     }
 }
