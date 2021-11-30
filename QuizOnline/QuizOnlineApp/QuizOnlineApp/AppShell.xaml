@@ -81,7 +81,7 @@
     <FlyoutItem Title="Main Menu" Icon="icon_about.png">
         <ShellContent Route="MainMenuTabbed" ContentTemplate="{DataTemplate local:MainMenuTabbed}" />
     </FlyoutItem>
-    <FlyoutItem Title="Profile" Icon="main-menu.png">
+    <FlyoutItem Title="Profile" Icon="icon_about.png">
         <ShellContent Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />
     </FlyoutItem>
     <FlyoutItem Title="About" Icon="icon_about.png">
