@@ -11,7 +11,7 @@
                 HorizontalOptions="CenterAndExpand"
                 BackgroundColor="#0EBDC8"
                 CornerRadius="8"
-                Margin="30 0 0 0"
+                Margin="30, 0, 0, 0"
                 Padding="10"
                 />
             <Button
@@ -21,7 +21,7 @@
                 HorizontalOptions="CenterAndExpand"
                 BackgroundColor="#0EBDC8"
                 CornerRadius="8"
-                Margin="30 0 0 0"
+                Margin="30, 0, 0, 0"
                 Padding="10"
                 />
             <Label
@@ -29,28 +29,28 @@
                 Grid.Column="0"
                 Text="Quizes played today: {}"
                 HorizontalOptions="CenterAndExpand"
-                Padding="30 0 0 0"
+                Padding="30, 0, 0, 0"
                 />
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
                 Text="Quizes won today: {}"
                 HorizontalOptions="CenterAndExpand"
-                Padding="30 0 0 0"
+                Padding="30, 0, 0, 0"
                 />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
                 Text="Quizes won: {}"
                 HorizontalOptions="CenterAndExpand"
-                Padding="30 0 0 0"
+                Padding="30, 0, 0, 0"
                 />
             <Label
                 Grid.Row="4"
                 Grid.Column="0"
                 Text="% of correct answers: {}"
                 HorizontalOptions="CenterAndExpand"
-                Padding="30 0 0 0"
+                Padding="30, 0, 0, 0"
                 />
         </Grid>
     </ContentPage.Content>
