@@ -1,4 +1,5 @@
-﻿using QuizOnlineApp.Services;
+﻿using QuizOnlineApp.Interfaces;
+using QuizOnlineApp.Services;
 using QuizOnlineApp.Views;
 using Xamarin.Forms;
 
@@ -9,7 +10,9 @@ namespace QuizOnlineApp.ViewModels
         private string email;
         private string password;
         private string confirmPassword;
-        protected IBasicAuthentication auth => DependencyService.Get<IBasicAuthentication>();
+        private string validationAlert;
+
+        private IBasicAuthentication auth => DependencyService.Get<IBasicAuthentication>();
 
         public Command RegisterCommand { get; }
         public Command CancelCommand { get; }
@@ -18,12 +21,20 @@ namespace QuizOnlineApp.ViewModels
         {
             RegisterCommand = new Command(OnRegisterClicked, ValidateRegister);
             CancelCommand = new Command(OnCancel);
+            validationAlert = "";
             PropertyChanged += (_, __) => RegisterCommand.ChangeCanExecute();
         }
 
         private bool ValidateRegister()
         {
-            return true;
+            var validator = DependencyService.Get<IPasswordValidator>();
+
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                ValidationAlert = validator.GetValidationAlert(password, confirmPassword);
+            }); 
+
+            return validator.GetResult(password, confirmPassword);
         }
 
         public string Email
@@ -49,11 +60,22 @@ namespace QuizOnlineApp.ViewModels
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
 
+        public string ValidationAlert
+        {
+            get => validationAlert; 
+            set
+            {
+                validationAlert = value;
+                OnPropertyChanged(nameof(ValidationAlert)); 
+            }
+        }
         private async void OnRegisterClicked()
         {
             await auth.Register(Email, Password);
 
-            await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(MainMenuPage)}");
+
+            await Shell.Current.DisplayAlert("Create User", "Account created. You are log in", "OK");
         }
     }
 }

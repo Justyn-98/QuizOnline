@@ -7,7 +7,6 @@ namespace QuizOnlineApp.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         public Command LoginCommand { get; }
-        protected IBasicAuthentication auth => DependencyService.Get<IBasicAuthentication>();
 
         public LoginViewModel()
         {
