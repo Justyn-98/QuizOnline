@@ -1,7 +1,5 @@
-﻿using QuizOnlineApp.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using QuizOnlineApp.Services;
+using QuizOnlineApp.Views;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
@@ -9,6 +7,7 @@ namespace QuizOnlineApp.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         public Command LoginCommand { get; }
+        protected IBasicAuthentication auth => DependencyService.Get<IBasicAuthentication>();
 
         public LoginViewModel()
         {
@@ -17,7 +16,6 @@ namespace QuizOnlineApp.ViewModels
 
         private async void OnLoginClicked(object obj)
         {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
             await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
         }
     }
