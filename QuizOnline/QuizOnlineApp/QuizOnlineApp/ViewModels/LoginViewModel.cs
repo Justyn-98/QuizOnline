@@ -1,6 +1,5 @@
 ﻿using QuizOnlineApp.Interfaces;
 using QuizOnlineApp.Views;
-using System;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
@@ -17,6 +16,12 @@ namespace QuizOnlineApp.ViewModels
             LoginCommand = new Command(OnLoginClicked);
             CancelCommand = new Command(OnCancel);
             PropertyChanged += (_, __) => LoginCommand.ChangeCanExecute();
+        }
+
+        private bool ValidateRegister()
+        {
+            return !string.IsNullOrWhiteSpace(email)
+                && !string.IsNullOrWhiteSpace(password);
         }
 
         private async void OnCancel(object obj)
@@ -43,7 +48,7 @@ namespace QuizOnlineApp.ViewModels
 
             if(token != null)
             {
-                await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
+                await Shell.Current.GoToAsync($"//{nameof(MainMenuPage)}");
                 Toast.Show("You re logged in.");
             }
             else

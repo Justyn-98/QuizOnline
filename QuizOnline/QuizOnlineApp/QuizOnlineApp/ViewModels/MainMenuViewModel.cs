@@ -10,12 +10,6 @@ namespace QuizOnlineApp.ViewModels
         public Command OpenMainMenuCommand;
         public MainMenuViewModel()
         {
-            var auth = DependencyService.Get<ISignInService>();
-            if (auth.IsSignIn())
-            {
-                 Shell.Current.GoToAsync($"//{nameof(LoginPage)}").Wait();
-
-            }
             Title = "Main Menu";
             OpenMainMenuCommand = new Command(OnMainMenuClicked);
         }

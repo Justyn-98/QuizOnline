@@ -1,6 +1,4 @@
-﻿using QuizOnlineApp.Interfaces;
-using QuizOnlineApp.Services;
-using QuizOnlineApp.Views;
+﻿using QuizOnlineApp.Services;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp
@@ -13,16 +11,8 @@ namespace QuizOnlineApp
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            var auth = DependencyService.Get<ISignInService>();
-            if (auth.IsSignIn())
-            {
-                MainPage = new LoginPage();
-
-            }
-            else
-            {
-                MainPage = new AppShell();
-            }
+            MainPage = new AppShell();
+            
         }
 
         protected override void OnStart()
