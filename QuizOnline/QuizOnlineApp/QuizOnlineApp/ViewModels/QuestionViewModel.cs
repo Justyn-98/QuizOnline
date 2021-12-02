@@ -8,7 +8,7 @@ namespace QuizOnlineApp.ViewModels
 {
     class QuestionViewModel : BaseViewModel
     {
-        Command OpenQuestionCommand;
+        public Command OpenQuestionCommand;
 
         public QuestionViewModel ()
         {

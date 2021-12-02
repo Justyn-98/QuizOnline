@@ -9,7 +9,7 @@ namespace QuizOnlineApp.ViewModels
 {
     class RankingViewModel : BaseViewModel
     {
-        Command OpenRankingCommand;
+        public Command OpenRankingCommand;
         public RankingViewModel ()
         {
             Title = "Ranking";

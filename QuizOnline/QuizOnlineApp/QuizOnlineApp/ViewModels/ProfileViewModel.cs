@@ -9,8 +9,7 @@ namespace QuizOnlineApp.ViewModels
 {
     class ProfileViewModel: BaseViewModel
     {
-        Command OpenProfileCommand;
-
+        public Command OpenProfileCommand;
         public ProfileViewModel ()
         {
             Title = "Profile";

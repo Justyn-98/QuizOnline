@@ -1,12 +1,11 @@
-﻿using QuizOnlineApp.ViewModels;
+﻿using QuizOnlineApp.Interfaces;
 using QuizOnlineApp.Views;
 using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp
 {
-    public partial class AppShell : Xamarin.Forms.Shell
+    public partial class AppShell : Shell
     {
         public AppShell()
         {
@@ -18,11 +17,16 @@ namespace QuizOnlineApp
             Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
             Routing.RegisterRoute(nameof(QuestionPage), typeof(QuestionPage));
             Routing.RegisterRoute(nameof(RankingPage), typeof(RankingPage));
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LoginPage");
+            var auth = DependencyService.Get<ISignInService>();
+            auth.SignOut();
+            await Current.GoToAsync("//LoginPage");
         }
     }
 }

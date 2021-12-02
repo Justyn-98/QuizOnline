@@ -1,8 +1,5 @@
-﻿using QuizOnlineApp.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using QuizOnlineApp.Interfaces;
+using QuizOnlineApp.Views;
 
 using Xamarin.Forms;
 
@@ -10,9 +7,15 @@ namespace QuizOnlineApp.ViewModels
 {
     public class MainMenuViewModel : BaseViewModel
     {
-        Command OpenMainMenuCommand;
+        public Command OpenMainMenuCommand;
         public MainMenuViewModel()
         {
+            var auth = DependencyService.Get<ISignInService>();
+            if (auth.IsSignIn())
+            {
+                 Shell.Current.GoToAsync($"//{nameof(LoginPage)}").Wait();
+
+            }
             Title = "Main Menu";
             OpenMainMenuCommand = new Command(OnMainMenuClicked);
         }

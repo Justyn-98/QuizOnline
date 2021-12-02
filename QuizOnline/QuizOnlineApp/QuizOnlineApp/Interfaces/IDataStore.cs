@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace QuizOnlineApp.Services
+namespace QuizOnlineApp.Interfaces
 {
     public interface IDataStore<T>
     {

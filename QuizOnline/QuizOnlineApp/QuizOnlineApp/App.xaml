@@ -32,6 +32,11 @@
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="Margin" Value="20" />
             </Style>
+
+            <Style TargetType="Button" x:Key="SecondaryButton" >
+                <Setter Property="TextColor" Value="#00bcd4" />
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
         </ResourceDictionary>        
     </Application.Resources>
 </Application>

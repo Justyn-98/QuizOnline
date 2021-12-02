@@ -1,5 +1,4 @@
 ﻿using QuizOnlineApp.Interfaces;
-using QuizOnlineApp.Services;
 using QuizOnlineApp.Views;
 using Xamarin.Forms;
 
@@ -11,8 +10,6 @@ namespace QuizOnlineApp.ViewModels
         private string password;
         private string confirmPassword;
         private string validationAlert;
-
-        private IBasicAuthentication auth => DependencyService.Get<IBasicAuthentication>();
 
         public Command RegisterCommand { get; }
         public Command CancelCommand { get; }
@@ -71,11 +68,10 @@ namespace QuizOnlineApp.ViewModels
         }
         private async void OnRegisterClicked()
         {
-            await auth.Register(Email, Password);
-
+            var auth = DependencyService.Get<ISignUpService>();
+            await auth.SignUp(Email, Password);
             await Shell.Current.GoToAsync($"//{nameof(MainMenuPage)}");
-
-            await Shell.Current.DisplayAlert("Create User", "Account created. You are log in", "OK");
+            Toast.Show("Account created. You can sign in now.");
         }
     }
 }
