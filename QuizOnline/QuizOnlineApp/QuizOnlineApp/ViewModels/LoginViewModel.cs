@@ -1,5 +1,6 @@
 ﻿using QuizOnlineApp.Interfaces;
 using QuizOnlineApp.Views;
+using System;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
@@ -13,18 +14,18 @@ namespace QuizOnlineApp.ViewModels
 
         public LoginViewModel()
         {
-            LoginCommand = new Command(OnLoginClicked);
+            LoginCommand = new Command(OnLoginClicked, ValidateLogin);
             CancelCommand = new Command(OnCancel);
             PropertyChanged += (_, __) => LoginCommand.ChangeCanExecute();
         }
 
-        private bool ValidateRegister()
+        private bool ValidateLogin()
         {
             return !string.IsNullOrWhiteSpace(email)
-                && !string.IsNullOrWhiteSpace(password);
+                          && !string.IsNullOrWhiteSpace(password);
         }
 
-        private async void OnCancel(object obj)
+        private async void OnCancel()
         {
             await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
         }
@@ -41,19 +42,23 @@ namespace QuizOnlineApp.ViewModels
             set => SetProperty(ref password, value);
         }
 
-        private async void OnLoginClicked(object obj)
+        private async void OnLoginClicked()
         {
             var auth = DependencyService.Get<ISignInService>();
-            var token = await auth.SignIn(email, password);
 
-            if(token != null)
+            try
             {
+                await auth.SignIn(email, password);
+            }
+            catch (Exception)
+            {
+                await Shell.Current.DisplayAlert("Login", "Wrong email or password", "OK");
+            }
+
+            if (auth.IsSignIn())
+            { 
                 await Shell.Current.GoToAsync($"//{nameof(MainMenuPage)}");
                 Toast.Show("You re logged in.");
-            }
-            else
-            {
-                await Shell.Current.DisplayAlert("SignIn", "Wrong email or password", "OK");
             }
         }
     }

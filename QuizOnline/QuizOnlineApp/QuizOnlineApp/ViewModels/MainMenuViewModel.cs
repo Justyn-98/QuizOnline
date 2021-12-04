@@ -1,11 +1,11 @@
-﻿using QuizOnlineApp.Interfaces;
+﻿using QuizOnlineApp.ViewModels.Commmon;
 using QuizOnlineApp.Views;
 
 using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
 {
-    public class MainMenuViewModel : BaseViewModel
+    public class MainMenuViewModel : AuthorizedPageViewModel
     {
         public Command OpenMainMenuCommand;
         public MainMenuViewModel()

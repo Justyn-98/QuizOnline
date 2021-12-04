@@ -1,14 +1,12 @@
-﻿using QuizOnlineApp.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using QuizOnlineApp.ViewModels.Commmon;
+using QuizOnlineApp.Views;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
 {
-    class GameSearchViewModel : BaseViewModel
+    public class GameSearchViewModel : AuthorizedPageViewModel
     {
-        Command OpenGameSearchCommand;
+        public Command OpenGameSearchCommand;
 
         public GameSearchViewModel ()
         {
