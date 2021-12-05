@@ -42,7 +42,7 @@ namespace QuizOnlineApp.ViewModels
         {
             try
             {
-                var item = await DataStore.GetItemAsync(itemId);
+                var item = await DataStore.ItemsRepository.GetAsync(itemId);
                 Id = item.Id;
                 Text = item.Text;
                 Description = item.Description;

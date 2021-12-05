@@ -1,5 +1,4 @@
-﻿using QuizOnlineApp.Models;
-using QuizOnlineApp.Interfaces;
+﻿using QuizOnlineApp.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +9,7 @@ namespace QuizOnlineApp.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        protected IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        protected IDatabaseContext DataStore = DependencyService.Get<IDatabaseContext>();
         protected IToast Toast => DependencyService.Get<IToast>();
 
 

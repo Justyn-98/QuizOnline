@@ -10,7 +10,7 @@ namespace QuizOnlineApp
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<FirebaseRepository>();
             MainPage = new AppShell();
             
         }
