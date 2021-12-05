@@ -1,11 +1,10 @@
 ﻿using QuizOnlineApp.Models;
-using QuizOnlineApp.ViewModels.Commmon;
 using System;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
 {
-    public class NewItemViewModel : AuthorizedPageViewModel
+    public class NewItemViewModel : BaseViewModel
     {
         private string text;
         private string description;

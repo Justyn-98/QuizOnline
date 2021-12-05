@@ -25,9 +25,9 @@ namespace QuizOnlineApp.ViewModels
                           && !string.IsNullOrWhiteSpace(password);
         }
 
-        private async void OnCancel()
+        private void OnCancel()
         {
-            await Shell.Current.GoToAsync($"//{nameof(RegisterPage)}");
+            Application.Current.MainPage = new RegisterPage();
         }
 
         public string Email
@@ -56,8 +56,8 @@ namespace QuizOnlineApp.ViewModels
             }
 
             if (auth.IsSignIn())
-            { 
-                await Shell.Current.GoToAsync($"//{nameof(MainMenuPage)}");
+            {
+                Application.Current.MainPage = new AppShell();
                 Toast.Show("You re logged in.");
             }
         }

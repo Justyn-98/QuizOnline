@@ -52,9 +52,9 @@ namespace QuizOnlineApp.ViewModels
             set => SetProperty(ref confirmPassword, value);
         }
 
-        private async void OnCancel()
+        private void OnCancel()
         {
-            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            Application.Current.MainPage = new LoginPage();
         }
 
         public string ValidationAlert

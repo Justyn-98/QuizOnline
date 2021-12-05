@@ -1,10 +1,9 @@
-﻿using QuizOnlineApp.ViewModels.Commmon;
-using QuizOnlineApp.Views;
+﻿using QuizOnlineApp.Views;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
 {
-    public class ProfileViewModel: AuthorizedPageViewModel
+    public class ProfileViewModel: BaseViewModel
     {
         public Command OpenProfileCommand;
         public ProfileViewModel ()

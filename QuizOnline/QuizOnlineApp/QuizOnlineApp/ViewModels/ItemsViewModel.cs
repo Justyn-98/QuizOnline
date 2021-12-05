@@ -1,5 +1,4 @@
 ﻿using QuizOnlineApp.Models;
-using QuizOnlineApp.ViewModels.Commmon;
 using QuizOnlineApp.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -9,7 +8,7 @@ using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
 {
-    public class ItemsViewModel : AuthorizedPageViewModel
+    public class ItemsViewModel : BaseViewModel
     {
         private Item _selectedItem;
 

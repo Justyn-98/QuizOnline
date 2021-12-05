@@ -1,12 +1,11 @@
-﻿using QuizOnlineApp.ViewModels.Commmon;
-using System;
+﻿using System;
 using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public class ItemDetailViewModel : AuthorizedPageViewModel
+    public class ItemDetailViewModel : BaseViewModel
     {
         private string itemId;
         private string text;
