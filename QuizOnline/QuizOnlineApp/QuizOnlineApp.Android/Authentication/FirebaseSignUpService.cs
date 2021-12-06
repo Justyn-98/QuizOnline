@@ -2,6 +2,7 @@
 using Firebase.Auth;
 using QuizOnlineApp.Droid.Authentication;
 using QuizOnlineApp.Interfaces;
+using QuizOnlineApp.Models;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -11,13 +12,18 @@ namespace QuizOnlineApp.Droid.Authentication
 {
     public class FirebaseSignUpService : ISignUpService
     {
-        public async Task<string> SignUp(string email, string password)
+        public async Task<SignUpResult> SignUp(string email, string password)
         {
             try
             {
                 var authResult = await FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
-                var token = await authResult.User.GetIdTokenAsync(false);
-                return token.ToString();
+                GetTokenResult token = await authResult.User.GetIdTokenAsync(false);
+
+                return await Task.FromResult(new SignUpResult
+                {
+                    UserId = authResult.User.Uid,
+                    Token = token.Token
+                });
 
             }
             catch (Exception ex) {

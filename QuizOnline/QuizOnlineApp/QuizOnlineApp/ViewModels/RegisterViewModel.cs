@@ -1,4 +1,5 @@
 ﻿using QuizOnlineApp.Interfaces;
+using QuizOnlineApp.Models;
 using QuizOnlineApp.Views;
 using Xamarin.Forms;
 
@@ -6,6 +7,7 @@ namespace QuizOnlineApp.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
     {
+        private string userName;
         private string email;
         private string password;
         private string confirmPassword;
@@ -34,6 +36,12 @@ namespace QuizOnlineApp.ViewModels
             return validator.GetResult(password, confirmPassword);
         }
 
+        public string Username
+        {
+            get => userName;
+            set => SetProperty(ref userName, value);
+        }
+
         public string Email
         {
             get => email;
@@ -51,26 +59,30 @@ namespace QuizOnlineApp.ViewModels
             get => confirmPassword;
             set => SetProperty(ref confirmPassword, value);
         }
+        public string ValidationAlert
+        {
+            get => validationAlert;
+            set
+            {
+                validationAlert = value;
+                OnPropertyChanged(nameof(ValidationAlert));
+            }
+        }
 
         private void OnCancel()
         {
             Application.Current.MainPage = new LoginPage();
         }
 
-        public string ValidationAlert
-        {
-            get => validationAlert; 
-            set
-            {
-                validationAlert = value;
-                OnPropertyChanged(nameof(ValidationAlert)); 
-            }
-        }
         private async void OnRegisterClicked()
         {
-            var auth = DependencyService.Get<ISignUpService>();
-            await auth.SignUp(Email, Password);
-            await Shell.Current.GoToAsync($"//{nameof(MainMenuPage)}");
+            ISignUpService signInService = DependencyService.Get<ISignUpService>();
+            IProfileCreator profileCreaotr = DependencyService.Get<IProfileCreator>();
+            IAppAuthorizationService authorizationService = DependencyService.Get<IAppAuthorizationService>();
+
+            SignUpResult result = await signInService.SignUp(Email, Password);
+            _ = await profileCreaotr.Create(result.UserId, Username);
+            authorizationService.AuthorizeApplication();
             Toast.Show("Account created. You can sign in now.");
         }
     }

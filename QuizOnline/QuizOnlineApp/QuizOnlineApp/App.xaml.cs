@@ -1,21 +1,19 @@
 ﻿using QuizOnlineApp.Interfaces;
-using QuizOnlineApp.Views;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp
 {
     public partial class App : Application
     {
+        private IAppAuthorizationService AuthorizationService = DependencyService.Get<IAppAuthorizationService>();
         public App()
         {
             InitializeComponent();
-
-            SetMainPage();
         }
 
         protected override void OnStart()
         {
-            SetMainPage();
+            AuthorizationService.AuthorizeApplication();
         }
 
         protected override void OnSleep()
@@ -24,21 +22,7 @@ namespace QuizOnlineApp
 
         protected override void OnResume()
         {
-            SetMainPage();
-        }
-
-        private void SetMainPage()
-        {
-            ISignInService signInService = DependencyService.Get<ISignInService>();
-
-            if(signInService.IsSignIn())
-            {
-                MainPage = new AppShell();
-            }
-            else
-            {
-                MainPage = new LoginPage();
-            }
+            AuthorizationService.AuthorizeApplication();
         }
     }
 }

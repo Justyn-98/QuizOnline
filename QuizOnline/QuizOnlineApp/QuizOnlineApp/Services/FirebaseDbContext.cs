@@ -12,5 +12,7 @@ namespace QuizOnlineApp.Services
     {
         public FirebaseClient Client => new FirebaseClient("https://quizonline-ed972-default-rtdb.firebaseio.com/");
         public IDataRepository<Item> ItemsRepository => new FirebaseRepository<Item>(Client);
+        public IDataRepository<UserProfile> ProfilesRepository => new FirebaseRepository<UserProfile>(Client);
+
     }
 }

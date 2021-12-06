@@ -22,10 +22,11 @@ namespace QuizOnlineApp
 
         }
 
-        private void OnMenuItemClicked(object sender, EventArgs e)
+        private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-            var auth = DependencyService.Get<ISignInService>();
-            auth.SignOut();
+            ISignInService signInService = DependencyService.Get<ISignInService>();
+            signInService.SignOut();
+            await Current.GoToAsync($"//{nameof(LoginPage)}");
             Application.Current.MainPage = new LoginPage();
         }
     }

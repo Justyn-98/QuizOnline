@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using QuizOnlineApp.Models;
+using System.Threading.Tasks;
 
 namespace QuizOnlineApp.Interfaces
 {
     public interface ISignUpService
     {
-        Task<string> SignUp(string email, string password);
+        Task<SignUpResult> SignUp(string email, string password);
     }
 }
