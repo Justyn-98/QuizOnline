@@ -52,7 +52,7 @@ namespace QuizOnlineApp.ViewModels
             }
             catch (Exception)
             {
-                await Shell.Current.DisplayAlert("Login", "Wrong email or password", "OK");
+                await Application.Current.MainPage.DisplayAlert("Login", "Wrong email or password", "OK");
             }
 
             if (auth.IsSignIn())

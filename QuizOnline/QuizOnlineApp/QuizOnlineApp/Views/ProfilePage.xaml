@@ -1,20 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="QuizOnlineApp.Views.ProfilePage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Edite" Command="{Binding EditeProfileCommand}" />
-    </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        <StackLayout Padding="10">
-            <Label Text= "{Binding Username}" 
-                            LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="16" />
-            <Label Text="{Binding RankPoints}" 
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13" />
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="QuizOnlineApp.Views.ProfilePage"
+             Title="{Binding Title}">
+
+    <StackLayout Spacing="20" Padding="15">
+        <Label Text="Username:" FontSize="Medium" />
+        <Label Text="{Binding Username}" FontSize="Small"/>
+        <Label Text="Ranking points:" FontSize="Medium" />
+        <Label Text="{Binding RankPoints}" FontSize="Small"/>
+        <Label Text="Ranking games:" FontSize="Medium" />
+        <Label Text="{Binding RankGames}" FontSize="Small"/>
+        <Label Text="Account created at:" FontSize="Medium" />
+        <Label Text="{Binding AccountCreatedAt}" FontSize="Small"/>
+    </StackLayout>
 </ContentPage>

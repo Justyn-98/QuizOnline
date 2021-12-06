@@ -9,8 +9,8 @@ namespace QuizOnlineApp.Views
     {
         public ProfilePage()
         {
-            BindingContext = new ProfileViewModel();
             InitializeComponent();
+            BindingContext  = new ProfileViewModel();
         }
     }
 }
