@@ -1,5 +1,7 @@
 ﻿using QuizOnlineApp.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace QuizOnlineApp.Interfaces
@@ -11,5 +13,6 @@ namespace QuizOnlineApp.Interfaces
         Task<bool> DeleteAsync(string id);
         Task<T> GetAsync(string id);
         Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetByConditionAsync(Func<T, bool> expression);
     }
 }

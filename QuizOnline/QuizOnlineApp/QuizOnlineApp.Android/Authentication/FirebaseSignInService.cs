@@ -21,5 +21,8 @@ namespace QuizOnlineApp.Droid.Authentication
 
         public bool IsSignIn()
           => FirebaseAuth.Instance.CurrentUser != null;
+
+        public string GetLoggedUserId()
+            => FirebaseAuth.Instance.Uid;
     }
 }

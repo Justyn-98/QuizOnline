@@ -2,11 +2,13 @@
 using Firebase.Database.Query;
 using QuizOnlineApp.Interfaces;
 using QuizOnlineApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace QuizOnlineApp.Services
+namespace QuizOnlineApp.Services.DataAccessLayer.Repositories
 {
     public class FirebaseRepository<T> : IDataRepository<T> where T : IPKModel
     {
@@ -58,6 +60,12 @@ namespace QuizOnlineApp.Services
             var list = await GetAllAsync();
 
             return await Task.FromResult(list.FirstOrDefault(s => s.Id == id));
+        }
+
+        public async Task<IEnumerable<T>> GetByConditionAsync(Func<T, bool> expression)
+        {
+            var list = await  GetAllAsync();
+            return list.Where(expression);
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()

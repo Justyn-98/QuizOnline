@@ -7,5 +7,6 @@ namespace QuizOnlineApp.Interfaces
         Task<string> SignIn(string email, string password);
         void SignOut();
         bool IsSignIn();
+        string GetLoggedUserId();
     }
 }

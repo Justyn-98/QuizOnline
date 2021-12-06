@@ -1,12 +1,13 @@
 ﻿using Firebase.Database;
 using QuizOnlineApp.Interfaces;
 using QuizOnlineApp.Models;
-using QuizOnlineApp.Services;
+using QuizOnlineApp.Services.DataAccessLayer;
+using QuizOnlineApp.Services.DataAccessLayer.Repositories;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(FirebaseDbContext))]
 
-namespace QuizOnlineApp.Services
+namespace QuizOnlineApp.Services.DataAccessLayer
 {
     public class FirebaseDbContext : IDatabaseContext
     {
