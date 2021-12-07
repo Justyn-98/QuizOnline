@@ -78,12 +78,18 @@ namespace QuizOnlineApp.ViewModels
         {
             ISignUpService signInService = DependencyService.Get<ISignUpService>();
             IProfileCreator profileCreaotr = DependencyService.Get<IProfileCreator>();
-            IAppAuthorizationService authorizationService = DependencyService.Get<IAppAuthorizationService>();
 
-            SignUpResult result = await signInService.SignUp(Email, Password);
-            _ = await profileCreaotr.Create(result.UserId, Username);
-            authorizationService.AuthorizeApplication();
-            Toast.Show("Account created. You can sign in now.");
+            AuthResult result = await signInService.SignUp(Email, Password);
+
+            if (result.Success)
+            {
+                _ = await profileCreaotr.Create(result.UserId, Username);
+                Toast.Show("Account created.");
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Login", result.Message, "OK");
+            }
         }
     }
 }

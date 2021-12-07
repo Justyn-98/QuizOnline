@@ -5,7 +5,8 @@ namespace QuizOnlineApp
 {
     public partial class App : Application
     {
-        private IAppAuthorizationService AuthorizationService = DependencyService.Get<IAppAuthorizationService>();
+        private readonly IAppAuthorizationService AuthorizationService = DependencyService.Get<IAppAuthorizationService>();
+
         public App()
         {
             InitializeComponent();

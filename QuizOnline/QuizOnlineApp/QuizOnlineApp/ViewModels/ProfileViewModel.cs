@@ -8,13 +8,14 @@ namespace QuizOnlineApp.ViewModels
 {
     public class ProfileViewModel: BaseViewModel, IAsyncInitialization
     {
-        private IProfileGetter ProfileGetter = DependencyService.Get<IProfileGetter>();
-        private ISignInService SignInService = DependencyService.Get<ISignInService>();
+        private readonly IProfileGetter ProfileGetter = DependencyService.Get<IProfileGetter>();
+        private readonly ISignInService SignInService = DependencyService.Get<ISignInService>();
         private string username;
         private string rankPoints;
         private string rankGames;
         private string accountCreatedAt;
-        private Task Initialization { get; set; }
+        public Task Initialization { get; private set; }
+
         public ProfileViewModel()
         {
             Title = "User Profile";

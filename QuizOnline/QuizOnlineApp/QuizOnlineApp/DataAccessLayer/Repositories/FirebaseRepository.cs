@@ -5,7 +5,6 @@ using QuizOnlineApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace QuizOnlineApp.Services.DataAccessLayer.Repositories
@@ -14,7 +13,7 @@ namespace QuizOnlineApp.Services.DataAccessLayer.Repositories
     {
 
         private readonly FirebaseClient _firebaseClient;
-        private string _tableName;
+        private readonly string _tableName;
 
         public FirebaseRepository(FirebaseClient firebaseClient)
         {
@@ -65,6 +64,7 @@ namespace QuizOnlineApp.Services.DataAccessLayer.Repositories
         public async Task<IEnumerable<T>> GetByConditionAsync(Func<T, bool> expression)
         {
             var list = await  GetAllAsync();
+
             return list.Where(expression);
         }
 

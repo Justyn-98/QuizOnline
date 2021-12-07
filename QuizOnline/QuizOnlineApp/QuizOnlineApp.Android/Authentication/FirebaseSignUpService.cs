@@ -12,25 +12,18 @@ namespace QuizOnlineApp.Droid.Authentication
 {
     public class FirebaseSignUpService : ISignUpService
     {
-        public async Task<SignUpResult> SignUp(string email, string password)
+        public async Task<AuthResult> SignUp(string email, string password)
         {
             try
             {
                 var authResult = await FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
                 GetTokenResult token = await authResult.User.GetIdTokenAsync(false);
 
-                return await Task.FromResult(new SignUpResult
-                {
-                    UserId = authResult.User.Uid,
-                    Token = token.Token
-                });
-
+                return AuthResult.Ok(token.Token, authResult.User.Uid);
             }
-            catch (Exception ex) {
-                Toast.MakeText(Android.App.Application.Context, ex.Message, ToastLength.Long).Show();
-                throw new Exception();
+            catch (FirebaseAuthException ex) {
+                return AuthResult.Error(ex.Message);
             }
-
         }
     }
 }

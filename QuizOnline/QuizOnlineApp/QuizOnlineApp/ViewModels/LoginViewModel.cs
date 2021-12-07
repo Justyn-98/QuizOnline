@@ -44,21 +44,18 @@ namespace QuizOnlineApp.ViewModels
 
         private async void OnLoginClicked()
         {
-            var auth = DependencyService.Get<ISignInService>();
+            ISignInService auth = DependencyService.Get<ISignInService>();
 
-            try
-            {
-                await auth.SignIn(email, password);
-            }
-            catch (Exception)
-            {
-                await Application.Current.MainPage.DisplayAlert("Login", "Wrong email or password", "OK");
-            }
+            var result = await auth.SignIn(email, password);
 
-            if (auth.IsSignIn())
+            if (result.Success)
             {
                 Application.Current.MainPage = new AppShell();
                 Toast.Show("You re logged in.");
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Login", result.Message, "OK");
             }
         }
     }

@@ -13,8 +13,8 @@ namespace QuizOnlineApp.Services
         private const int DEAFAULT_START_RANK_POINTS = 1000;
         private const int DEAFAULT_START_RANK_GAMES = 0;
 
-        private IDatabaseContext DataStore = DependencyService.Get<IDatabaseContext>();
-        private IDateTimeGetter DateTimeGetter = DependencyService.Get<IDateTimeGetter>();
+        private readonly IDatabaseContext DataStore = DependencyService.Get<IDatabaseContext>();
+        private readonly IDateTimeGetter DateTimeGetter = DependencyService.Get<IDateTimeGetter>();
 
         public async Task<bool> Create(string userId, string userName)
         {

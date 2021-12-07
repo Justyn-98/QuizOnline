@@ -11,7 +11,7 @@ namespace QuizOnlineApp.Services
 {
     public class ProfileGetter : IProfileGetter
     {
-        private IDatabaseContext DatabaseContext = DependencyService.Get<IDatabaseContext>();
+        private readonly IDatabaseContext DatabaseContext = DependencyService.Get<IDatabaseContext>();
         public async Task<UserProfile> GetUserProfile(string userId)
         {
             IEnumerable<UserProfile> profiles = await DatabaseContext.ProfilesRepository.GetByConditionAsync(x => x.UserId == userId);
