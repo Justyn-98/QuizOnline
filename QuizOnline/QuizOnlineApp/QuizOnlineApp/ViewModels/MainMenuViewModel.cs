@@ -16,7 +16,7 @@ namespace QuizOnlineApp.ViewModels
 
         private async void OnMainMenuClicked (object obj)
         {
-            await Shell.Current.GoToAsync($"//{nameof(MainMenuPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(MainMenuTabbed)}");
         }
     }
 }

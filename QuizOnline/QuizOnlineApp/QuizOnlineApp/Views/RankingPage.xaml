@@ -3,10 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuizOnlineApp.Views.RankingPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to ranking!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid RowDefinitions="auto, *, *, *, *" ColumnDefinitions="*, *, *" BackgroundColor="#4580AA">
+            <Picker 
+                x:Name="RankingCategoryPicker"
+                Grid.Row="0" 
+                Grid.Column="0"
+                BackgroundColor="#0EBDC8"
+                Margin="30"
+                />
+            <Picker 
+                x:Name="RankingDatePicker"
+                Grid.Row="0" 
+                Grid.Column="1"
+                BackgroundColor="#0EBDC8"
+                Margin="30"
+                />
+            <Picker 
+                x:Name="RankingFriendsPicker"
+                Grid.Row="0" 
+                Grid.Column="2"
+                BackgroundColor="#0EBDC8"
+                Margin="30"
+                />
+            <ListView
+                x:Name="RankingPlayersList"
+                Grid.Row="1" 
+                Grid.Column="0"
+                />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

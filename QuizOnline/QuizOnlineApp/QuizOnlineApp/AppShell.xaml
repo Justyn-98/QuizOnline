@@ -79,7 +79,7 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     <FlyoutItem Title="Main Menu" Icon="icon_about.png">
-        <ShellContent Route="MainMenuPage" ContentTemplate="{DataTemplate local:MainMenuPage}" />
+        <ShellContent Route="MainMenuTabbed" ContentTemplate="{DataTemplate local:MainMenuTabbed}" />
     </FlyoutItem>
     <FlyoutItem Title="Profile" Icon="icon_about.png">
         <ShellContent Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />
