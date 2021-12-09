@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using QuizOnlineApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,6 +9,7 @@ namespace QuizOnlineApp.Views
     {
         public GameSearchPage()
         {
+            BindingContext = new GameSearchViewModel();
             InitializeComponent();
         }
     }

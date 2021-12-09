@@ -1,10 +1,6 @@
 ﻿using QuizOnlineApp.Models;
 using QuizOnlineApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace QuizOnlineApp.Views
 {
@@ -14,8 +10,8 @@ namespace QuizOnlineApp.Views
 
         public NewItemPage()
         {
-            InitializeComponent();
             BindingContext = new NewItemViewModel();
+            InitializeComponent();
         }
     }
 }

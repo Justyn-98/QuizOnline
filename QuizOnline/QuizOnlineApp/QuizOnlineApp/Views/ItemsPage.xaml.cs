@@ -1,14 +1,5 @@
-﻿using QuizOnlineApp.Models;
-using QuizOnlineApp.ViewModels;
-using QuizOnlineApp.Views;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QuizOnlineApp.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace QuizOnlineApp.Views
 {
@@ -18,9 +9,8 @@ namespace QuizOnlineApp.Views
 
         public ItemsPage()
         {
-            InitializeComponent();
-
             BindingContext = _viewModel = new ItemsViewModel();
+            InitializeComponent();
         }
 
         protected override void OnAppearing()

@@ -1,13 +1,11 @@
 ﻿using QuizOnlineApp.Models;
+using QuizOnlineApp.ViewModels.Commmon;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
 {
-    public class NewItemViewModel : BaseViewModel
+    public class NewItemViewModel : AuthorizedPageViewModel
     {
         private string text;
         private string description;
@@ -16,14 +14,14 @@ namespace QuizOnlineApp.ViewModels
         {
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
-            this.PropertyChanged +=
+            PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
 
         private bool ValidateSave()
         {
-            return !String.IsNullOrWhiteSpace(text)
-                && !String.IsNullOrWhiteSpace(description);
+            return !string.IsNullOrWhiteSpace(text)
+                && !string.IsNullOrWhiteSpace(description);
         }
 
         public string Text
@@ -43,7 +41,6 @@ namespace QuizOnlineApp.ViewModels
 
         private async void OnCancel()
         {
-            // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");
         }
 
@@ -58,7 +55,6 @@ namespace QuizOnlineApp.ViewModels
 
             await DataStore.AddItemAsync(newItem);
 
-            // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");
         }
     }

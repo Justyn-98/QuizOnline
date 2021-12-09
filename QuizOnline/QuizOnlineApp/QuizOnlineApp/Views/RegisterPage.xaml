@@ -3,19 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="QuizOnlineApp.Views.LoginPage"
+              mc:Ignorable="d"
+             x:Class="QuizOnlineApp.Views.RegisterPage"
              Shell.NavBarIsVisible="False">
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Label Text="Sign In"
+            <Label Text="Sign Up"
                     Style="{StaticResource HeaderLabel}"/>
+            <Entry Placeholder="Username" Text="{Binding Username, Mode=TwoWay}" FontSize="Medium" />
             <Entry Placeholder="Email" Text="{Binding Email, Mode=TwoWay}" FontSize="Medium" />
             <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password, Mode=TwoWay}" FontSize="Medium" />
-            <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand} "/>
-            <Button Text="Don't you have an account yet ? sign-up"
+            <Entry Placeholder="Confirm Password" IsPassword="True" Text="{Binding ConfirmPasssword, Mode=TwoWay}" FontSize="Medium" />
+            <Label  Text="{Binding ValidationAlert, Mode=TwoWay}" TextColor="Red"/>
+            <Button VerticalOptions="Center" Text="Register" Command="{Binding RegisterCommand} "/>
+            <Button Text="Already have an account ? sign-in"
                     Command="{Binding CancelCommand}"
-                    Style="{StaticResource SecondaryButton}" />   
+                    Style="{StaticResource SecondaryButton}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

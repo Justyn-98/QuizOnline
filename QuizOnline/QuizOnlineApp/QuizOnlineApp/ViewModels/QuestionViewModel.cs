@@ -1,14 +1,12 @@
-﻿using QuizOnlineApp.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using QuizOnlineApp.ViewModels.Commmon;
+using QuizOnlineApp.Views;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
 {
-    class QuestionViewModel : BaseViewModel
+    public class QuestionViewModel : AuthorizedPageViewModel
     {
-        Command OpenQuestionCommand;
+        public Command OpenQuestionCommand;
 
         public QuestionViewModel ()
         {

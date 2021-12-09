@@ -1,5 +1,5 @@
 ﻿using QuizOnlineApp.Models;
-using QuizOnlineApp.Services;
+using QuizOnlineApp.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,9 @@ namespace QuizOnlineApp.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        protected IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        protected IToast Toast => DependencyService.Get<IToast>();
+
 
         bool isBusy = false;
         public bool IsBusy

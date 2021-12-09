@@ -1,16 +1,13 @@
-﻿using QuizOnlineApp.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using QuizOnlineApp.ViewModels.Commmon;
+using QuizOnlineApp.Views;
 
 using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
 {
-    public class MainMenuViewModel : BaseViewModel
+    public class MainMenuViewModel : AuthorizedPageViewModel
     {
-        Command OpenMainMenuCommand;
+        public Command OpenMainMenuCommand;
         public MainMenuViewModel()
         {
             Title = "Main Menu";

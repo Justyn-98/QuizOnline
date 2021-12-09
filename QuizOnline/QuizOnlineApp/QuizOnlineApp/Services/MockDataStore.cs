@@ -1,5 +1,6 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
+using QuizOnlineApp.Interfaces;
 using QuizOnlineApp.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace QuizOnlineApp.Services
     public class MockDataStore : IDataStore<Item>
     {
 
-        FirebaseClient firebaseClient = new FirebaseClient("https://quizonline-ed972-default-rtdb.firebaseio.com/");
+       private readonly FirebaseClient firebaseClient = new FirebaseClient("https://quizonline-ed972-default-rtdb.firebaseio.com/");
 
         public async Task<bool> AddItemAsync(Item item)
         {
