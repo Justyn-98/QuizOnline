@@ -19,7 +19,6 @@ namespace QuizOnlineApp
             Routing.RegisterRoute(nameof(RankingPage), typeof(RankingPage));
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
-
         }
 
         private void OnMenuItemClicked(object sender, EventArgs e)
