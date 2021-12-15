@@ -1,22 +1,20 @@
-﻿using QuizOnlineApp.Services;
+﻿using QuizOnlineApp.Interfaces;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp
 {
     public partial class App : Application
     {
+        private readonly IAppAuthorizationService AuthorizationService = DependencyService.Get<IAppAuthorizationService>();
 
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
-            
         }
 
         protected override void OnStart()
         {
+            AuthorizationService.AuthorizeApplication();
         }
 
         protected override void OnSleep()
@@ -25,6 +23,7 @@ namespace QuizOnlineApp
 
         protected override void OnResume()
         {
+            AuthorizationService.AuthorizeApplication();
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace QuizOnlineApp.Interfaces
+﻿namespace QuizOnlineApp.Interfaces
 {
     public interface IToast
     {

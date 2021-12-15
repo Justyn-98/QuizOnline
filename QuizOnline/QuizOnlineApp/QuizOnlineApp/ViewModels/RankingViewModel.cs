@@ -1,10 +1,9 @@
-﻿using QuizOnlineApp.ViewModels.Commmon;
-using QuizOnlineApp.Views;
+﻿using QuizOnlineApp.Views;
 using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
 {
-    public class RankingViewModel : AuthorizedPageViewModel
+    public class RankingViewModel : BaseViewModel
     {
         public Command OpenRankingCommand;
         public RankingViewModel ()

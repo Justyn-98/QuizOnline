@@ -1,15 +1,17 @@
 ﻿using QuizOnlineApp.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace QuizOnlineApp.Views
 {
-    public partial class ItemsPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ProfilePage : ContentPage
     {
-        readonly ItemsViewModel _viewModel;
+        readonly ProfileOptionsViewModel _viewModel;
 
-        public ItemsPage()
+        public ProfilePage()
         {
-            BindingContext = _viewModel = new ItemsViewModel();
+            BindingContext = _viewModel = new ProfileOptionsViewModel();
             InitializeComponent();
         }
 

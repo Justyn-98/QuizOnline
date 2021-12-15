@@ -10,11 +10,11 @@
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
             <Label Text="Sign Up"
                     Style="{StaticResource HeaderLabel}"/>
+            <Label  Text="{Binding ValidationAlert, Mode=TwoWay}" TextColor="Red"/>
             <Entry Placeholder="Username" Text="{Binding Username, Mode=TwoWay}" FontSize="Medium" />
             <Entry Placeholder="Email" Text="{Binding Email, Mode=TwoWay}" FontSize="Medium" />
             <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password, Mode=TwoWay}" FontSize="Medium" />
             <Entry Placeholder="Confirm Password" IsPassword="True" Text="{Binding ConfirmPasssword, Mode=TwoWay}" FontSize="Medium" />
-            <Label  Text="{Binding ValidationAlert, Mode=TwoWay}" TextColor="Red"/>
             <Button VerticalOptions="Center" Text="Register" Command="{Binding RegisterCommand} "/>
             <Button Text="Already have an account ? sign-in"
                     Command="{Binding CancelCommand}"

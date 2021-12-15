@@ -53,7 +53,7 @@ namespace QuizOnlineApp.ViewModels
                 Description = Description
             };
 
-            await DataStore.AddItemAsync(newItem);
+            await DataStore.ItemsRepository.AddAsync(newItem);
 
             await Shell.Current.GoToAsync("..");
         }

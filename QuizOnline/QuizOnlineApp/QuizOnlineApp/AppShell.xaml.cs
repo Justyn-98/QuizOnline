@@ -19,14 +19,14 @@ namespace QuizOnlineApp
             Routing.RegisterRoute(nameof(RankingPage), typeof(RankingPage));
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
-
         }
 
-        private async void OnMenuItemClicked(object sender, EventArgs e)
+        private void OnMenuItemClicked(object sender, EventArgs e)
         {
-            var auth = DependencyService.Get<ISignInService>();
-            auth.SignOut();
-            await Current.GoToAsync("//LoginPage");
+            ISignInService signInService = DependencyService.Get<ISignInService>();
+            signInService.SignOut();
+            //Application.Current.MainPage = new AppShell();
+            Application.Current.MainPage = new LoginPage();
         }
     }
 }

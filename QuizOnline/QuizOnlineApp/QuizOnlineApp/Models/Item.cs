@@ -2,7 +2,7 @@
 
 namespace QuizOnlineApp.Models
 {
-    public class Item
+    public class Item : IPKModel
     {
         public string Id { get; set; }
         public string Text { get; set; }

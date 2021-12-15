@@ -1,8 +1,7 @@
-﻿using Android.Widget;
-using Firebase.Auth;
+﻿using Firebase.Auth;
+using QuizOnlineApp.Common;
 using QuizOnlineApp.Droid.Authentication;
 using QuizOnlineApp.Interfaces;
-using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,20 +10,18 @@ namespace QuizOnlineApp.Droid.Authentication
 {
     public class FirebaseSignUpService : ISignUpService
     {
-        public async Task<string> SignUp(string email, string password)
+        public async Task<IServiceResponse<string>> SignUp(string email, string password)
         {
             try
             {
-                var authResult = await FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
-                var token = await authResult.User.GetIdTokenAsync(false);
-                return token.ToString();
+                IAuthResult authResult = await FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
+                GetTokenResult token = await authResult.User.GetIdTokenAsync(false);
 
+                return ServiceResponse<string>.Ok(authResult.User.Uid);
             }
-            catch (Exception ex) {
-                Toast.MakeText(Android.App.Application.Context, ex.Message, ToastLength.Long).Show();
-                throw new Exception();
+            catch (FirebaseAuthException ex) {
+                return ServiceResponse<string>.Error(ex.Message);
             }
-
         }
     }
 }

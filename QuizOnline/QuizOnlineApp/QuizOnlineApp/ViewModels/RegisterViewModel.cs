@@ -6,6 +6,7 @@ namespace QuizOnlineApp.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
     {
+        private string userName;
         private string email;
         private string password;
         private string confirmPassword;
@@ -34,6 +35,12 @@ namespace QuizOnlineApp.ViewModels
             return validator.GetResult(password, confirmPassword);
         }
 
+        public string Username
+        {
+            get => userName;
+            set => SetProperty(ref userName, value);
+        }
+
         public string Email
         {
             get => email;
@@ -51,27 +58,37 @@ namespace QuizOnlineApp.ViewModels
             get => confirmPassword;
             set => SetProperty(ref confirmPassword, value);
         }
-
-        private async void OnCancel()
-        {
-            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-        }
-
         public string ValidationAlert
         {
-            get => validationAlert; 
+            get => validationAlert;
             set
             {
                 validationAlert = value;
-                OnPropertyChanged(nameof(ValidationAlert)); 
+                OnPropertyChanged(nameof(ValidationAlert));
             }
         }
+
+        private void OnCancel()
+        {
+            Application.Current.MainPage = new LoginPage();
+        }
+
         private async void OnRegisterClicked()
         {
-            var auth = DependencyService.Get<ISignUpService>();
-            await auth.SignUp(Email, Password);
-            await Shell.Current.GoToAsync($"//{nameof(MainMenuPage)}");
-            Toast.Show("Account created. You can sign in now.");
+            ISignUpService signInService = DependencyService.Get<ISignUpService>();
+            IProfileCreator profileCreaotr = DependencyService.Get<IProfileCreator>();
+
+            IServiceResponse<string> result = await signInService.SignUp(Email, Password);
+
+            if (result.Success)
+            {
+                _ = await profileCreaotr.Create(result.Content, Username);
+                Toast.Show("Account created.");
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Login", result.Message, "OK");
+            }
         }
     }
 }
