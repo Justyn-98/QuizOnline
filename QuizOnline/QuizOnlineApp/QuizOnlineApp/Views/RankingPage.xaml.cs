@@ -11,6 +11,21 @@ namespace QuizOnlineApp.Views
         {
             BindingContext = new RankingViewModel();
             InitializeComponent();
+
+            RankingCategoryPicker.Items.Add("PHP");
+            RankingCategoryPicker.Items.Add("C#");
+            RankingCategoryPicker.Items.Add("Docker");
+
+            RankingDatePicker.Items.Add("Today");
+            RankingDatePicker.Items.Add("Weekly");
+            RankingDatePicker.Items.Add("Monthly");
+
+            RankingFriendsPicker.Items.Add("Friends");
+            RankingFriendsPicker.Items.Add("Global");
+
+            RankingCategoryPicker.SelectedIndex = 0;
+            RankingDatePicker.SelectedIndex = 0;
+            RankingFriendsPicker.SelectedIndex = 0;
         }
     }
 }
