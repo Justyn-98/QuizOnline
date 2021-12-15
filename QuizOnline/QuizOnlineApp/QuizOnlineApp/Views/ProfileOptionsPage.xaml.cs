@@ -7,11 +7,11 @@ namespace QuizOnlineApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : ContentPage
     {
-        readonly ProfileViewModel _viewModel;
+        readonly ProfileOptionsViewModel _viewModel;
 
         public ProfilePage()
         {
-            BindingContext = _viewModel = new ProfileViewModel();
+            BindingContext = _viewModel = new ProfileOptionsViewModel();
             InitializeComponent();
         }
 

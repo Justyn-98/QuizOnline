@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace QuizOnlineApp.ViewModels
 {
-    public class ProfileViewModel: BaseViewModel
+    public class ProfileOptionsViewModel: BaseViewModel
     {
         private readonly IProfileGetter ProfileGetter = DependencyService.Get<IProfileGetter>();
         private readonly IProfileUpdater ProfileUpdater = DependencyService.Get<IProfileUpdater>();
@@ -23,7 +23,7 @@ namespace QuizOnlineApp.ViewModels
         public Command ChangeProfilePhotoCommand { get; }
         public Command EditNameCommand { get; }
 
-        public ProfileViewModel()
+        public ProfileOptionsViewModel()
         {
             Title = "User Profile";
             RefreshProfileCommand = new Command(async () => await RefreshProfile());
@@ -90,20 +90,18 @@ namespace QuizOnlineApp.ViewModels
 
         public async void ChangeProfilePhoto()
         {
-            IsBusy = true;
             string userId = SignInService.GetLoggedUserId();
             _ = await ProfileUpdater.UpdateProfilePhoto(userId);
-            IsBusy = false;
+            await RefreshProfile();
         }
 
         public async void EditName()
         {
-            IsBusy = true;
             string userId = SignInService.GetLoggedUserId();
             string newNAme = await Application.Current.MainPage.DisplayPromptAsync("Edit username"," type in your new name");
             IServiceResponse result = await ProfileUpdater.UpdateUserName(userId, newNAme);
             ShowResult(result);
-            IsBusy = false;
+            await RefreshProfile();
         }
     }
 }

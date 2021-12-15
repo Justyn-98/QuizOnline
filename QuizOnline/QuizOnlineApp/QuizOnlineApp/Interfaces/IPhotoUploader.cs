@@ -4,6 +4,6 @@ namespace QuizOnlineApp.Interfaces
 {
     public interface IPhotoUploader
     {
-        Task<string> UploadPhotoFromGallery();
+        Task<IServiceResponse<string>> UploadPhotoFromGallery();
     }
 }

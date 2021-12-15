@@ -3,6 +3,7 @@ using QuizOnlineApp.Interfaces;
 using QuizOnlineApp.Models;
 using QuizOnlineApp.Services;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -18,20 +19,27 @@ namespace QuizOnlineApp.Services
 
         public async Task<IServiceResponse<string>> UpdateProfilePhoto(string userId)
         {
-            try
-            {
-                UserProfile profile = await ProfileGetter.GetUserProfile(userId);
-                string path = await PhotoUploader.UploadPhotoFromGallery();
+            UserProfile profile = await ProfileGetter.GetUserProfile(userId);
+            IServiceResponse<string> response = await PhotoUploader.UploadPhotoFromGallery();
 
-                profile.ProfilePhoto = path;
-                _ = await DbContext.ProfilesRepository.UpdateAsync(profile);
-
-                return ServiceResponse<string>.Ok(path);
-            }
-            catch (Exception exception)
+            if (response.Success)
             {
-                return ServiceResponse<string>.Error(exception.Message);
+                try
+                {
+                    File.Delete(profile.ProfilePhoto);
+                    profile.ProfilePhoto = response.Content;
+                    _ = await DbContext.ProfilesRepository.UpdateAsync(profile);
+
+                    return ServiceResponse<string>.Ok(profile.ProfilePhoto);
+
+                }
+                catch (Exception exception)
+                {
+                    return ServiceResponse<string>.Error(exception.Message);
+                }
             }
+
+            return ServiceResponse<string>.Error(response.Message);
         }
 
         public async Task<IServiceResponse> UpdateUserName(string userId, string newUserName)

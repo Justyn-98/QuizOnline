@@ -1,6 +1,6 @@
-﻿
-using Plugin.Media;
+﻿using Plugin.Media;
 using Plugin.Media.Abstractions;
+using QuizOnlineApp.Common;
 using QuizOnlineApp.Interfaces;
 using QuizOnlineApp.Services;
 using System;
@@ -13,7 +13,7 @@ namespace QuizOnlineApp.Services
 {
     public class PhotoUploader : IPhotoUploader
     {
-        public async Task<string> UploadPhotoFromGallery()
+        public async Task<IServiceResponse<string>> UploadPhotoFromGallery()
         {
             _ = await CrossMedia.Current.Initialize();
 
@@ -24,19 +24,23 @@ namespace QuizOnlineApp.Services
                     PhotoSize = PhotoSize.Full,
                     CompressionQuality = 40,
                 });
+
+                if(file == null)
+                {
+                    return ServiceResponse<string>.Error("Image not selected");
+                }
+
                 byte[] imageArray = File.ReadAllBytes(file.Path);
 
                 string folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                var filePath = Path.Combine(folder, Guid.NewGuid().ToString());
-
-                if (File.Exists(filePath))
-                    File.Delete(filePath);
+                string filePath = Path.Combine(folder, Guid.NewGuid().ToString());
 
                 File.WriteAllBytes(filePath, imageArray);
 
-                return filePath;
+                return ServiceResponse<string>.Ok(filePath);
             }
-            return "";
+
+            return ServiceResponse<string>.Error("Pick up photo is not supported on your device.");
         }
     }
 }
