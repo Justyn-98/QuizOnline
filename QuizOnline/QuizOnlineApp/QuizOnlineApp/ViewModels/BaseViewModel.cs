@@ -12,7 +12,6 @@ namespace QuizOnlineApp.ViewModels
         protected IDatabaseContext DataStore = DependencyService.Get<IDatabaseContext>();
         protected IToast Toast => DependencyService.Get<IToast>();
 
-
         bool isBusy = false;
         public bool IsBusy
         {
@@ -25,6 +24,18 @@ namespace QuizOnlineApp.ViewModels
         {
             get { return title; }
             set { SetProperty(ref title, value); }
+        }
+
+        protected void ShowResult(IServiceResponse response)
+        {
+            if (response.Success)
+            {
+                Toast.Show(response.Message);
+            }
+            else
+            {
+                _ =  Application.Current.MainPage.DisplayAlert("Error", response.Message, "OK");
+            }
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,

@@ -5,6 +5,6 @@ namespace QuizOnlineApp.Interfaces
 {
     public interface ISignUpService
     {
-        Task<AuthResult> SignUp(string email, string password);
+        Task<IServiceResponse<string>> SignUp(string email, string password);
     }
 }

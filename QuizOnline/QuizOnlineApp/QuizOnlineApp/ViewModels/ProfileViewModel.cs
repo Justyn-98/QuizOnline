@@ -10,9 +10,8 @@ namespace QuizOnlineApp.ViewModels
     public class ProfileViewModel: BaseViewModel
     {
         private readonly IProfileGetter ProfileGetter = DependencyService.Get<IProfileGetter>();
+        private readonly IProfileUpdater ProfileUpdater = DependencyService.Get<IProfileUpdater>();
         private readonly ISignInService SignInService = DependencyService.Get<ISignInService>();
-        private readonly IPhotoUploader PhotoUploader = DependencyService.Get<IPhotoUploader>();
-        private readonly IDatabaseContext DbContext = DependencyService.Get<IDatabaseContext>();
 
         private string username;
         private string rankPoints;
@@ -92,44 +91,19 @@ namespace QuizOnlineApp.ViewModels
         public async void ChangeProfilePhoto()
         {
             IsBusy = true;
-            try
-            {
-             var path = await PhotoUploader.UploadPhotoFromGallery();
-                string userId = SignInService.GetLoggedUserId();
-                UserProfile loggedUserProfile = await ProfileGetter.GetUserProfile(userId);
-                loggedUserProfile.ProfilePhoto = path;
-                await DbContext.ProfilesRepository.UpdateAsync(loggedUserProfile);
-            }
-            catch(Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            string userId = SignInService.GetLoggedUserId();
+            _ = await ProfileUpdater.UpdateProfilePhoto(userId);
+            IsBusy = false;
         }
 
         public async void EditName()
         {
             IsBusy = true;
-            try
-            {
-                var newNAme = await Application.Current.MainPage.DisplayPromptAsync("Input name"," type in your new name");
-                string userId = SignInService.GetLoggedUserId();
-                UserProfile loggedUserProfile = await ProfileGetter.GetUserProfile(userId);
-                loggedUserProfile.Name = newNAme;
-                await DbContext.ProfilesRepository.UpdateAsync(loggedUserProfile);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            string userId = SignInService.GetLoggedUserId();
+            string newNAme = await Application.Current.MainPage.DisplayPromptAsync("Edit username"," type in your new name");
+            IServiceResponse result = await ProfileUpdater.UpdateUserName(userId, newNAme);
+            ShowResult(result);
+            IsBusy = false;
         }
     }
 }

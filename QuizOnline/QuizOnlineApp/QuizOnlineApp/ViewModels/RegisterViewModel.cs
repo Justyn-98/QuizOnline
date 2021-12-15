@@ -1,5 +1,4 @@
 ﻿using QuizOnlineApp.Interfaces;
-using QuizOnlineApp.Models;
 using QuizOnlineApp.Views;
 using Xamarin.Forms;
 
@@ -79,11 +78,11 @@ namespace QuizOnlineApp.ViewModels
             ISignUpService signInService = DependencyService.Get<ISignUpService>();
             IProfileCreator profileCreaotr = DependencyService.Get<IProfileCreator>();
 
-            AuthResult result = await signInService.SignUp(Email, Password);
+            IServiceResponse<string> result = await signInService.SignUp(Email, Password);
 
             if (result.Success)
             {
-                _ = await profileCreaotr.Create(result.UserId, Username);
+                _ = await profileCreaotr.Create(result.Content, Username);
                 Toast.Show("Account created.");
             }
             else
